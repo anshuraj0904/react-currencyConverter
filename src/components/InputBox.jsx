@@ -16,14 +16,17 @@ function InputBox(
         className = ""
     })
 {
-    const id = useId()
+
+    
+    const id = useId()  // It is just used to generate unique ids for the input fields
+    
   return (
     <>
     <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
         <div className='w-1-2'>
             <label htmlFor={id} className='text-black/40 mb-2 inline-block'>{label}</label>
             <input
-              id={id}
+              id={id} // The id of input field and the htmlFor of label are same, so that when we click on the label, the input field gets focused.
               type='number'
               className='outline-none w-full bg-transparent py-1.5'
               placeholder='Amount'

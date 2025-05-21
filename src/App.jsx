@@ -9,16 +9,35 @@ function App() {
   const [toCurrency, setToCurrency] = useState('inr') // For converting to
   const [amount, setAmount] = useState(0) // Amount to be converted
   const [convertedAmount, setConvertedAmount] = useState(0) // Converted amount
-  const [currencyOptions,setCurrencyOptions] = useState([]) // Currency options for the dropdown
   const [label, setLabel] = useState('') // Label for the input box
 
 
-  UseCurrencyInfo(fromCurrency)
+  const currencyInfo = UseCurrencyInfo(fromCurrency)
+  const currencyOptions = Object.keys(currencyInfo) // This will get the list of currencies from the API
+
+
+  // Let us now do the setup for the currency options and the conversions.
+  // 1. Converting from A to B:-
+  const convert = ()=>{
+    setConvertedAmount(amount * currencyInfo[toCurrency]) // This will convert the amount from A to B
+  }  
+
+  // 2. The swap button will swap the currencies and the amounts.
+  const swapVals = ()=>{
+    setFromCurrency(toCurrency)
+    setToCurrency(fromCurrency)
+    setAmount(convertedAmount)
+    setConvertedAmount(amount)
+    // Converts the currency and the amount perfectly.
+  }
+
+  
   return (
-      <div className='w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat' 
+      <div className='w-full h-screen flex flex-wrap flex-col justify-center items-center bg-cover bg-no-repeat' 
       style={{ backgroundImage: "url('https://images.pexels.com/photos/259191/pexels-photo-259191.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}>
          <InputBox/> 
-         <button className='bg-black text-white py-2 px-4 cursor-pointer'>Just Tap Me</button>
+          <button className='m-2 p-3 bg-blue-500'>Swap</button>
+         <InputBox/>
       </div>
   )
 }
